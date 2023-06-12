@@ -53,6 +53,7 @@ public class StudentSelectOneMenuComplete {
 /*
 	모든 학생 조회하는 StudentSelectAllMenu 클래스 : 1줄에 1개 행을 출력하세요.
 	과목명을 입력하면 해당 과목 조회하는 ScoreSelectWithSubject 클래스 
+			ㄴ 조회 내용은 모든 컬럼.
 
 */
 
