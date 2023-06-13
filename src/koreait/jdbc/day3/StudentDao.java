@@ -11,6 +11,19 @@ import koreait.jdbc.day2.OracleUtility;
 
 //DAO : Data Access(접근-읽기와 쓰기) Object
 //		ㄴ SQL 실행 메소드를 모아 놓은 클래스.
+
+/* StudentDao 의 내용을 요약.
+ * insert,update  는 sql 파라미터에 전달한 데이터의 타입을 dto 
+ * delete는                                        원시형 또는 String
+ * delete sql 의 조건절 컬럼이 여러개 일때는 dto가 될수 있습니다. map 도 종종 사용합니다.
+ * 
+ * insert,update,delete 는 정수 리턴값으로 반영된 행의 개수를 전달. 
+ * 
+ * selectOne : sql 파라미터에 전달할 데이터를 메소드 인자로 함.
+ * selectAll : 파라미터 없으며 여러개의 행을 저장할 객체는 List 타입.
+ * 
+ */
+
 public class StudentDao {
 	
 	//나중에 db를 `쉽게 코딩`하기 위한 `프레임워크`를 사용하면 Exception 처리 안해도 됩니다.
