@@ -14,6 +14,7 @@ public class StudentDaoTest {
 		try {
 			int count = dao.insert(dto);
 			System.out.println("학생 등록 " + count + "건 입력 성공!!");
+			System.out.println("입력 결과 조회 : " + dao.selectOne(dto.getStuno()));
 		} catch (SQLException e) {
 			System.out.println("예외 - " + e.getMessage());
 		}
@@ -24,6 +25,7 @@ public class StudentDaoTest {
 		try {
 			int count = dao.update(dto);
 			System.out.println("학생 등록 " + count + "건 정보 수정 성공!!");
+			System.out.println("수정 결과 조회 : " + dao.selectOne(dto.getStuno()));
 		} catch (SQLException e) {
 			System.out.println("예외 - " + e.getMessage());
 
@@ -35,7 +37,7 @@ public class StudentDaoTest {
 		try {
 			int count = dao.delete("2023009");
 			System.out.println("학생 등록 " + count + "건 삭제 성공!!");
-
+			System.out.println("삭제 결과 조회 : " + dao.selectOne("2023009"));
 		} catch (SQLException e) {
 			System.out.println("예외 - " + e.getMessage());
 

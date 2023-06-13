@@ -2,6 +2,7 @@ package koreait.jdbc.day3;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import koreait.jdbc.day2.OracleUtility;
@@ -60,6 +61,31 @@ public class StudentDao {
 		
 		return result;
 	}
+	
+	
+	//select * from TBL_STUDENT where stuno = '2023002'; 실행을 위한 
+	//   ㄴ selectOne 메소드 정의
+	public StudentDto selectOne(String stuno) throws SQLException {
+		Connection connection = OracleUtility.getConnection();
+		String sql ="select * from TBL_STUDENT where stuno = ?";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setString(1, stuno);
+		
+		ResultSet rs = ps.executeQuery();
+		StudentDto result=null;
+		if(rs.next()) {
+			//String stuno2 = rs.getString(1);
+			String name = rs.getString(2);
+			int age = rs.getInt(3);
+			String address = rs.getString(4);
+			result = new StudentDto(stuno, name, age, address);
+	// 코드 줄이면 아래와 같이 씁니다.		
+	//		return  new StudentDto(stuno, rs.getString(2), rs.getInt(3), rs.getString(4));
+		}
+		return result;
+	}
+	
+	
 	
 
 }
