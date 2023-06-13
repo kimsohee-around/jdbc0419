@@ -1,6 +1,7 @@
 package koreait.jdbc.day3;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class StudentDaoTest {
 	
@@ -42,6 +43,21 @@ public class StudentDaoTest {
 			System.out.println("예외 - " + e.getMessage());
 
 		}
+		System.out.println("\n:::::::4. selectAll :::::::");
+		System.out.println("학생 테이블의 모든 데이터 조회하여 출력합니다.");
+		try {
+			List<StudentDto> list = dao.selectAll();
+			for(StudentDto stu : list) {
+				System.out.println(stu);
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 }
