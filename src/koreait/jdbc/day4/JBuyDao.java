@@ -2,7 +2,9 @@ package koreait.jdbc.day4;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import koreait.jdbc.day2.OracleUtility;
@@ -37,6 +39,39 @@ public class JBuyDao {		//구매와 관련된 CRUD 실행 SQL. DAO : JCustomerDa
 				}
 			}
 			return count;
-		}
-	
+		} 
+//	 select * from mypage_buy where customid='twice';
+	 public List<MyPageBuy> mypageBuy(String customid) throws SQLException{
+		 Connection conn = OracleUtility.getConnection();
+			String sql = "select * from mypage_buy where customid= ?"; 
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, customid);
+			ResultSet rs = ps.executeQuery();
+			
+			List<MyPageBuy> list = new ArrayList<>();
+			while(rs.next()) {
+				list.add(new MyPageBuy(rs.getDate(1), 
+						rs.getString(2), 
+						rs.getString(3), 
+						rs.getString(4), 
+						rs.getInt(5), 
+						rs.getInt(6),
+						rs.getLong(7)));
+			}
+			return list;
+	 }
+
+//	 select sum(total) from mypage_buy where customid='twice';
+	 public long myMoney(String customid) throws SQLException {
+		 Connection conn = OracleUtility.getConnection();
+		 String sql = "select sum(total) from mypage_buy where customid= ?"; 
+		 PreparedStatement ps = conn.prepareStatement(sql);
+		 ps.setString(1, customid);
+		 ResultSet rs = ps.executeQuery();
+		 
+		 rs.next();
+		 long sum = rs.getLong(1);
+		 
+		 return sum;
+	 }
 }

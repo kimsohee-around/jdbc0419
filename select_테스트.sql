@@ -62,5 +62,43 @@ alter table j_buy add constraint q_check check (quantity between 1 and 30);
 -- check 제약조건 오류
 insert into j_buy values (jbuy_seq.nextval,'twice','APP99',33,sysdate);		
 
+-- 6.마이페이지 구매내역
+-- 2개 테이블 join 하여 행단위로 합계(수량*가격) 수식까지 조회하기
+select buy_date , p.pcode ,pname, quantity, price, quantity*price total from j_buy  b
+join j_product p
+on p.pcode=b.pcode
+and b.customid='twice'
+order by buy_date desc
+;
+-- 자주 사용될 join 결과는 view 로 만들기. view 는 create or replace 로 생성후 에 수정까지 가능.
+create or replace view mypage_buy
+as
+select buy_date , customid, p.pcode ,pname, quantity, price, quantity*price total from j_buy  b
+join j_product p
+on p.pcode=b.pcode
+order by buy_date desc
+;
+
+select * from mypage_buy where customid='twice';
+
+
+select sum(total) from mypage_buy where customid='twice';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -73,16 +73,19 @@ public class MyMallMain {
 					if(sc.nextLine().toLowerCase().equals("y")) break;
 				}
 				
-				System.out.println("장바구니 확인 : " + carts);
+//				System.out.println("장바구니 확인 : " + carts);
+				System.out.println("마이페이지 - 장바구니");
+				for(JBuy b : carts) {
+					System.out.println("상품코드 :" + b.getPcode() + ",수량:" + b.getQuantity());
+				}
 				//dao에서 carts 를 전달받아 list 만큼 반복하는 insert 실행하기
 				int count = bdao.insertMany(carts);			//구매 테이블에 저장하기
 				if(count!=0)
-					System.out.println("\n"
-						+ "결제를 완료했습니다. 현재까지 "+ customer.getName() +" 회원님의 구매 내역 입니다.");
-				
-				//6. 마이페이지- 구매 내역 보기. 총 구매 금액을 출력해 주기
-				
-		
+					System.out.println("\n결제를 완료했습니다.");
+				//5번에 장바구니 담긴 상품이 j_buy 테이블에 1)정상 저장 ,2)잘못된 수량 rollback 까지 되는지 확인
+				//6. 마이페이지- 구매 내역 보기. 총 구매 금액을 출력해 주기 -> sql 테스트 해보고 메소드 작성 시도하기
+				System.out.println("::: 현재까지 "+ customer.getName() +" 회원님의 구매 내역 입니다. :::");
+				//출력해야함.
 		}else {				//로그인 안 했을 때.
 			System.out.println("로그인을 취소했습니다. 프로그램 종료합니다.");
 		}
