@@ -13,8 +13,8 @@ import koreait.jdbc.day2.OracleUtility;
 //		ㄴ SQL 실행 메소드를 모아 놓은 클래스.
 
 /* StudentDao 의 내용을 요약.
- * insert,update  는 sql 파라미터에 전달한 데이터의 타입을 dto 
- * delete는                                        원시형 또는 String
+ * insert,update  는 sql 파라미터에 전달한 데이터의 타입을 dto 로 했습니다.
+ * delete는                  "                    원시형 또는 String 로 합니다.
  * delete sql 의 조건절 컬럼이 여러개 일때는 dto가 될수 있습니다. map 도 종종 사용합니다.
  * 
  * insert,update,delete 는 정수 리턴값으로 반영된 행의 개수를 전달. 
@@ -47,7 +47,7 @@ public class StudentDao {
 	
 	public int update(StudentDto student) throws SQLException {
 		Connection connection = OracleUtility.getConnection();
-		String sql = "update TBL_STUDENT set age = ? , address = ? where stuno = ?";
+		String sql="";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		
 		ps.setInt(1, student.getAge());

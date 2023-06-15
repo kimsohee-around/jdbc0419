@@ -16,6 +16,7 @@ public class JCustomerDao {		//구매와 관련된 CRUD 실행 SQL. DAO : JCusto
 		String sql = "select * from j_custom"
 				+ " where custom_id=?";
 		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, customid);
 		
 		ResultSet rs = ps.executeQuery();
 		JCustomer temp = null;
