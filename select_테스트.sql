@@ -50,6 +50,17 @@ insert into j_product values ('APP11','A1','얼음골사과 1박스',32500);
 insert into j_product values ('APP99','A1','씻은사과 10개',25000);
 
 -- j_buy 테이블에 사용할 시퀀스
-create sequence jbuy_seq start with 1008;
+drop sequence jbuy_seq;			-- 시퀀스 삭제
+-- 적절한 시작값으로 다시 생성하기
+create sequence jbuy_seq start with 1008;	
 select jbuy_seq.nextval from dual;
+
+-- delete from j_buy where buy_seq = 1029;
+-- rollback 테스트
+select * from j_buy;
+alter table j_buy add constraint q_check check (quantity between 1 and 30);
+-- check 제약조건 오류
+insert into j_buy values (jbuy_seq.nextval,'twice','APP99',33,sysdate);		
+
+
 

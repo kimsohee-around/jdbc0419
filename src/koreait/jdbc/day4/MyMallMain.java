@@ -59,7 +59,7 @@ public class MyMallMain {
 		//4. 상품 장바구니 담기 - 장바구니 테이블이 없으므로 구매를 원하는 상품을 main에서 List 로 담기
 		JBuyDao bdao = new JBuyDao();
 		List<JBuy> carts = new ArrayList<>();
-		if(isLogin) {
+		if(isLogin) {			//로그인 했을 때
 				while(true) {
 					System.out.println("\n장바구니에 담기 합니다. 그만하려면 상품코드 0000 입력하세요.");
 					System.out.print("구매할 상품 코드 입력하세요. >>> ");
@@ -75,10 +75,15 @@ public class MyMallMain {
 				
 				System.out.println("장바구니 확인 : " + carts);
 				//dao에서 carts 를 전달받아 list 만큼 반복하는 insert 실행하기
-				
-				System.out.println("\n"
+				int count = bdao.insertMany(carts);			//구매 테이블에 저장하기
+				if(count!=0)
+					System.out.println("\n"
 						+ "결제를 완료했습니다. 현재까지 "+ customer.getName() +" 회원님의 구매 내역 입니다.");
-		}else {
+				
+				//6. 마이페이지- 구매 내역 보기. 총 구매 금액을 출력해 주기
+				
+		
+		}else {				//로그인 안 했을 때.
 			System.out.println("로그인을 취소했습니다. 프로그램 종료합니다.");
 		}
 		sc.close();    //맨 끝에 작성.
