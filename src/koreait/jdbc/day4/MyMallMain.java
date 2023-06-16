@@ -91,7 +91,7 @@ public class MyMallMain {
 					List<MyPageBuy> buys = bdao.mypageBuy(customid);
 					DecimalFormat df = new DecimalFormat("###,###,###");
 					for(MyPageBuy b : buys) {
-						System.out.println(String.format("%15s %20s %5d %12d %16d", 
+						System.out.println(String.format("%15s %20s %5d %12s %16s", 
 								b.getBuy_date(),
 								b.getPname(),
 								b.getQuantity(),

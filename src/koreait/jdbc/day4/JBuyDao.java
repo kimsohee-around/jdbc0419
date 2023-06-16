@@ -24,7 +24,7 @@ public class JBuyDao {		//구매와 관련된 CRUD 실행 SQL. DAO : JCustomerDa
 			try {
 				conn.setAutoCommit(false);			//auto commit 설정 - false
 				ps = conn.prepareStatement(sql);
-				for(JBuy b : carts) {
+				for(JBuy b : carts) {		//리스트의 사이즈 만큼 반복
 					ps.setString(1,b.getCustomid());
 					ps.setString(2,b.getPcode());
 					ps.setInt(3,b.getQuantity());

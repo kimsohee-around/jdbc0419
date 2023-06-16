@@ -30,7 +30,7 @@ public class StudentUpdateMenu {
 		Scanner sc = new Scanner(System.in);
 		String stuno,address,age;
 		String sql="update TBL_STUDENT\r\n"
-				+ "set age = ?, address =? \r\n"
+				+ "set age = ?, address =?,email = ? \r\n"
 				+ "where stuno = ? ";		//문자열 안에 sql문  ; 기호 넣으면 오류입니다.
 		System.out.println("학생번호 0000 입력은 수정 취소 입니다.");
 		System.out.print("학번을 입력하세요 >>> ");
