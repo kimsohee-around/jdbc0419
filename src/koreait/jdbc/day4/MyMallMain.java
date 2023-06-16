@@ -1,6 +1,7 @@
 package koreait.jdbc.day4;
 
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -86,6 +87,24 @@ public class MyMallMain {
 				//6. 마이페이지- 구매 내역 보기. 총 구매 금액을 출력해 주기 -> sql 테스트 해보고 메소드 작성 시도하기
 				System.out.println("::: 현재까지 "+ customer.getName() +" 회원님의 구매 내역 입니다. :::");
 				//출력해야함.
+				try {
+					List<MyPageBuy> buys = bdao.mypageBuy(customid);
+					DecimalFormat df = new DecimalFormat("###,###,###");
+					for(MyPageBuy b : buys) {
+						System.out.println(String.format("%15s %20s %5d %12d %16d", 
+								b.getBuy_date(),
+								b.getPname(),
+								b.getQuantity(),
+								df.format(b.getPrice()),
+								df.format(b.getTotal())));
+					}
+					long total = bdao.myMoney(customid);
+					System.out.println("총 구매금액 : " + df.format(total) );
+					
+				} catch (SQLException e) {
+					System.out.println("구매내역 예외 : " + e.getMessage());
+				}
+				
 		}else {				//로그인 안 했을 때.
 			System.out.println("로그인을 취소했습니다. 프로그램 종료합니다.");
 		}

@@ -12,6 +12,7 @@ import koreait.jdbc.day2.OracleUtility;
 public class JBuyDao {		//구매와 관련된 CRUD 실행 SQL. DAO : JCustomerDao , JProductDao
 //메소드 이름은 insert , update , delete , select , selectByPname 등등으로 이름을 작성하세요.
 
+		//*트랜잭션을 처리하는 예시 : auto commit 을 해제하고 직접 commit을 합니다.*
 		//try catch 를 직접하세요.throws 아닙니다.
 		public int insertMany(List<JBuy> carts) {
 			Connection conn = OracleUtility.getConnection();
@@ -65,6 +66,8 @@ public class JBuyDao {		//구매와 관련된 CRUD 실행 SQL. DAO : JCustomerDa
 	 public long myMoney(String customid) throws SQLException {
 		 Connection conn = OracleUtility.getConnection();
 		 String sql = "select sum(total) from mypage_buy where customid= ?"; 
+		 //함수 조회하는 select는 항상 결과행이 1개, 컬럼도 1개
+		 
 		 PreparedStatement ps = conn.prepareStatement(sql);
 		 ps.setString(1, customid);
 		 ResultSet rs = ps.executeQuery();

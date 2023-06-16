@@ -30,7 +30,7 @@ public class JProductDao {		//구매와 관련된 CRUD 실행 SQL. DAO : JCustom
 		return list;
 	}
 	
-	//3. 상품명으로 검색하기 (유사검색-> **`검색어가 포함된 상품명`**을 조회하기)
+	//3. 상품명으로 검색하기 (유사검색-> **`검색어가 포함된 상품명`**을 목록 조회하기)
 	public List<JProduct> selectByPname(String pname) throws SQLException{
 		//pname은 사용자가 입력한 검색어
 		Connection conn = OracleUtility.getConnection();
