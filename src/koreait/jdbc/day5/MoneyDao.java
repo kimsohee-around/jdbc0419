@@ -14,7 +14,17 @@ public class MoneyDao {
    
    public List<MoneyDto> moneyall() throws SQLException {
       Connection conn = OracleUtility.getConnection();
-      String sql = "select * from sales";
+      String sql = "SELECT mt.custno,custname,"
+      			+ "	decode(grade,'A','VIP','B','일반','C','직원') agrade,psum \r\n"
+				+ "FROM MEMBER_TBL_02 mt\r\n"
+				+ "JOIN  \r\n"
+				+ "(	 \r\n"
+				+ "	SELECT custno , sum(price) psum     \r\n"
+				+ "	FROM MONEY_TBL_02 \r\n"
+				+ "	GROUP BY custno\r\n"
+				+ ") sale  \r\n"
+				+ "ON mt.custno = sale.custno\r\n"
+				+ "ORDER BY psum desc";
       PreparedStatement ps = conn.prepareStatement(sql);
       
       List<MoneyDto> result = new ArrayList<>();
