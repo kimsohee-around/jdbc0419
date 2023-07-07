@@ -26,21 +26,19 @@ public class MemberDao {
 		
 	public int insert(MemberDto md) throws SQLException {
 		Connection conn = OracleUtility.getConnection();
-		String sql = "insert into MEMBER_TBL_02 values (시퀀스,?,?,?,?,?,sysdate)";
+		String sql = "insert into MEMBER_TBL_02 values (seq_custno.nextval, ?, ?, ?, sysdate, ?, ?)";
 		PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, md.getCustno());
-			ps.setString(2, md.getCustname());
-			ps.setString(3, md.getPhone());
-			ps.setString(4, md.getAddress());
-			ps.setDate(5, md.getJoindate());
-			ps.setString(6, md.getGrade());
-			ps.setString(7, md.getCity());
+			ps.setString(1, md.getCustname());
+			ps.setString(2, md.getPhone());
+			ps.setString(3, md.getAddress());
+			ps.setString(4, md.getGrade());
+			ps.setString(5, md.getCity());
 			
 			int result = ps.executeUpdate();
 			ps.close();
 			conn.close();
 			return result;
-			}
+		}
 	
 	public MemberDto selectOne(int custno) throws SQLException {		//수정할 데이터 가져오기
 		Connection conn = OracleUtility.getConnection();
@@ -63,7 +61,9 @@ public class MemberDao {
 	
 	public List<MemberDto> selectAll() throws SQLException {		//전체 목록 가져오기
 		Connection conn = OracleUtility.getConnection();
-		String sql = "select * from MEMBER_TBL_02";
+		String sql = "select custno,custname,phone,address,joindate,"
+				+ " decode(grade,'A','VIP','B','일반','C','직원') ,city "
+				+ " from MEMBER_TBL_02";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
 		List<MemberDto> result = new ArrayList<>();
